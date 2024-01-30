@@ -71,12 +71,12 @@ public class SpellChecker {
 	public static String spellChecker(String word, int threshold, String[] dictionary) {
 
 		String newWord = word.toLowerCase();
-		int minDistance = threshold;
+		int minDistance = threshold + 1;
 
 		for (int i = 0; i < dictionary.length; i++) {
 			int num = levenshtein(dictionary[i], word);
 			if (num <= threshold) {
-				if (minDistance >= num) {
+				if (minDistance > num) {
 					newWord = dictionary[i];
 					minDistance = num;
 				}
@@ -85,3 +85,8 @@ public class SpellChecker {
 		return newWord;
 	}
 }
+
+// return (1 + Math.min(
+// Math.min(levenshtein(tail(lowerCaseWord1), lowerCaseWord2),
+// levenshtein(lowerCaseWord1, tail(lowerCaseWord2))),
+// levenshtein(tail(lowerCaseWord1), tail(lowerCaseWord2))));
